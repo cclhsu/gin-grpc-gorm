@@ -1,0 +1,1708 @@
+basePath: /
+definitions:
+  model.CommonDate:
+    properties:
+      completedAt:
+        type: string
+      completedBy:
+        type: string
+      createdAt:
+        type: string
+      createdBy:
+        type: string
+      endDate:
+        type: string
+      startDate:
+        type: string
+      startedAt:
+        type: string
+      startedBy:
+        type: string
+      updatedAt:
+        type: string
+      updatedBy:
+        type: string
+    type: object
+  model.CreateTeamRequest:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.TeamContent'
+      metadata:
+        $ref: '#/definitions/model.TeamMetadata'
+    type: object
+  model.CreateUserRequest:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.UserContent'
+      metadata:
+        $ref: '#/definitions/model.UserMetadata'
+    type: object
+  model.Data:
+    properties:
+      message:
+        type: string
+    type: object
+  model.HelloJsonResponse:
+    properties:
+      data:
+        $ref: '#/definitions/model.Data'
+    type: object
+  model.IdUuid:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+    type: object
+  model.ListTeamIdUuid:
+    properties:
+      teamIdUuids:
+        items:
+          $ref: '#/definitions/model.IdUuid'
+        type: array
+    type: object
+  model.ListTeamsContentResponse:
+    properties:
+      teamContentResponses:
+        items:
+          $ref: '#/definitions/model.TeamContentResponse'
+        type: array
+    type: object
+  model.ListTeamsMetadataResponse:
+    properties:
+      teamMetadataResponses:
+        items:
+          $ref: '#/definitions/model.TeamMetadataResponse'
+        type: array
+    type: object
+  model.ListUserIdUuid:
+    properties:
+      userIdUuids:
+        items:
+          $ref: '#/definitions/model.IdUuid'
+        type: array
+    type: object
+  model.ListUsersContentResponse:
+    properties:
+      userContentResponses:
+        items:
+          $ref: '#/definitions/model.UserContentResponse'
+        type: array
+    type: object
+  model.ListUsersMetadataResponse:
+    properties:
+      userMetadataResponses:
+        items:
+          $ref: '#/definitions/model.UserMetadataResponse'
+        type: array
+    type: object
+  model.PROJECT_ROLE_TYPES:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    type: integer
+    x-enum-varnames:
+    - PROJECT_ROLE_TYPES_UNSPECIFIED
+    - PROJECT_ROLE_TYPES_PM
+    - PROJECT_ROLE_TYPES_EM
+    - PROJECT_ROLE_TYPES_DEV
+    - PROJECT_ROLE_TYPES_QA
+    - PROJECT_ROLE_TYPES_BA
+    - PROJECT_ROLE_TYPES_UX
+    - PROJECT_ROLE_TYPES_O
+  model.SCRUM_ROLE_TYPES:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    type: integer
+    x-enum-varnames:
+    - SCRUM_ROLE_TYPES_UNSPECIFIED
+    - SCRUM_ROLE_TYPES_PO
+    - SCRUM_ROLE_TYPES_SM
+    - SCRUM_ROLE_TYPES_MEMBER
+    - SCRUM_ROLE_TYPES_O
+  model.Team:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.TeamContent'
+      metadata:
+        $ref: '#/definitions/model.TeamMetadata'
+    type: object
+  model.TeamContent:
+    properties:
+      email:
+        type: string
+      members:
+        items:
+          $ref: '#/definitions/model.IdUuid'
+        type: array
+      productOwner:
+        $ref: '#/definitions/model.IdUuid'
+      scrumMaster:
+        $ref: '#/definitions/model.IdUuid'
+    type: object
+  model.TeamContentResponse:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.TeamContent'
+    type: object
+  model.TeamMetadata:
+    properties:
+      dates:
+        $ref: '#/definitions/model.CommonDate'
+      name:
+        type: string
+    type: object
+  model.TeamMetadataResponse:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      metadata:
+        $ref: '#/definitions/model.TeamMetadata'
+    type: object
+  model.UpdateTeamContentRequest:
+    properties:
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.TeamContent'
+    type: object
+  model.UpdateTeamMetadataRequest:
+    properties:
+      UUID:
+        type: string
+      metadata:
+        $ref: '#/definitions/model.TeamMetadata'
+    type: object
+  model.UpdateTeamRequest:
+    properties:
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.TeamContent'
+      metadata:
+        $ref: '#/definitions/model.TeamMetadata'
+    type: object
+  model.UpdateUserContentRequest:
+    properties:
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.UserContent'
+    type: object
+  model.UpdateUserMetadataRequest:
+    properties:
+      UUID:
+        type: string
+      metadata:
+        $ref: '#/definitions/model.UserMetadata'
+    type: object
+  model.UpdateUserRequest:
+    properties:
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.UserContent'
+      metadata:
+        $ref: '#/definitions/model.UserMetadata'
+    type: object
+  model.User:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.UserContent'
+      metadata:
+        $ref: '#/definitions/model.UserMetadata'
+    type: object
+  model.UserContent:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phone:
+        type: string
+      projectRoles:
+        items:
+          $ref: '#/definitions/model.PROJECT_ROLE_TYPES'
+        type: array
+      scrumRoles:
+        items:
+          $ref: '#/definitions/model.SCRUM_ROLE_TYPES'
+        type: array
+    type: object
+  model.UserContentResponse:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      content:
+        $ref: '#/definitions/model.UserContent'
+    type: object
+  model.UserMetadata:
+    properties:
+      dates:
+        $ref: '#/definitions/model.CommonDate'
+      name:
+        type: string
+    type: object
+  model.UserMetadataResponse:
+    properties:
+      ID:
+        type: string
+      UUID:
+        type: string
+      metadata:
+        $ref: '#/definitions/model.UserMetadata'
+    type: object
+info:
+  contact: {}
+  description: This is a sample API server using Gin and Swagger.
+  title: My API
+  version: "1.0"
+paths:
+  /health/healthy:
+    get:
+      consumes:
+      - application/json
+      description: Get Health Check
+      parameters:
+      - default: service
+        description: Service name
+        in: query
+        name: service
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Health Check
+      tags:
+      - health
+  /health/live:
+    get:
+      consumes:
+      - application/json
+      description: Get Health Check
+      parameters:
+      - default: service
+        description: Service name
+        in: query
+        name: service
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Health Check
+      tags:
+      - health
+  /health/ready:
+    get:
+      consumes:
+      - application/json
+      description: Get Health Check
+      parameters:
+      - default: service
+        description: Service name
+        in: query
+        name: service
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get Health Check
+      tags:
+      - health
+  /hello/json:
+    get:
+      consumes:
+      - application/json
+      description: get hello world json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.HelloJsonResponse'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: get hello world json
+      tags:
+      - hello
+  /hello/string:
+    get:
+      consumes:
+      - application/json
+      description: get hello world string
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: get hello world string
+      tags:
+      - hello
+  /teams:
+    get:
+      description: Get Teams
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Team'
+            type: array
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Teams
+      tags:
+      - Team
+    post:
+      consumes:
+      - application/json
+      description: Create Team
+      parameters:
+      - description: New team details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateTeamRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team created
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Create Team
+      tags:
+      - Team
+  /teams/{UUID}:
+    delete:
+      description: Delete Team by UUID
+      parameters:
+      - description: Team UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team deleted
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Delete Team by UUID
+      tags:
+      - Team
+    get:
+      description: Get Team by UUID
+      parameters:
+      - description: Team UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Team'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Team by UUID
+      tags:
+      - Team
+    put:
+      description: Update Team by UUID
+      parameters:
+      - description: Team UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - description: Updated team details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateTeamRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team updated
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update Team by UUID
+      tags:
+      - Team
+  /teams/{UUID}/content:
+    get:
+      description: Get Team Content by UUID
+      parameters:
+      - description: Team UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team content found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Team not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Team Content by UUID
+      tags:
+      - Team
+    put:
+      description: Update Team Content by UUID
+      parameters:
+      - description: Team UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - description: Updated team content
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateTeamContentRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team content updated
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Team not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update Team Content by UUID
+      tags:
+      - Team
+  /teams/{UUID}/metadata:
+    get:
+      description: Get Team Metadata by UUID
+      parameters:
+      - description: Team UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team metadata found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Team not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Team Metadata by UUID
+      tags:
+      - Team
+    put:
+      description: Update Team Metadata by UUID
+      parameters:
+      - description: Team UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - description: Updated team metadata
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateTeamMetadataRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team metadata updated
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Team not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update Team Metadata by UUID
+      tags:
+      - Team
+  /teams/content:
+    get:
+      description: Get Teams Content
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ListTeamsContentResponse'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Teams Content
+      tags:
+      - Team
+  /teams/email/{email}:
+    get:
+      description: Get Team by Email
+      parameters:
+      - description: Team email
+        in: path
+        name: email
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Team not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Team by Email
+      tags:
+      - Team
+  /teams/id/{ID}:
+    get:
+      description: Get Team by ID
+      parameters:
+      - description: Team ID
+        in: path
+        name: ID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Team not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Team by ID
+      tags:
+      - Team
+  /teams/ids-and-uuids:
+    get:
+      description: Get Team IDs and UUIDs
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ListTeamIdUuid'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Team IDs and UUIDs
+      tags:
+      - Team
+  /teams/metadata:
+    get:
+      description: Get Teams Metadata
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ListTeamsMetadataResponse'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Teams Metadata
+      tags:
+      - Team
+  /teams/name/{name}:
+    get:
+      description: Get Team by Name
+      parameters:
+      - description: Team name
+        in: path
+        name: name
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Team found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: Team not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Team by Name
+      tags:
+      - Team
+  /users:
+    get:
+      description: Get Users
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Users
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Create User
+      parameters:
+      - description: New user details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateUserRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User created
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Create User
+      tags:
+      - User
+  /users/{UUID}:
+    delete:
+      description: Delete User by UUID
+      parameters:
+      - description: User UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User deleted
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Delete User by UUID
+      tags:
+      - User
+    get:
+      description: Get User by UUID
+      parameters:
+      - description: User UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get User by UUID
+      tags:
+      - User
+    put:
+      description: Update User by UUID
+      parameters:
+      - description: User UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - description: Updated user details
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateUserRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User updated
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update User by UUID
+      tags:
+      - User
+  /users/{UUID}/content:
+    get:
+      description: Get User Content by UUID
+      parameters:
+      - description: User UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User content found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get User Content by UUID
+      tags:
+      - User
+    put:
+      description: Update User Content by UUID
+      parameters:
+      - description: User UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - description: Updated user content
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateUserContentRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User content updated
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update User Content by UUID
+      tags:
+      - User
+  /users/{UUID}/metadata:
+    get:
+      description: Get User Metadata by UUID
+      parameters:
+      - description: User UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User metadata found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get User Metadata by UUID
+      tags:
+      - User
+    put:
+      description: Update User Metadata by UUID
+      parameters:
+      - description: User UUID
+        in: path
+        name: UUID
+        required: true
+        type: string
+      - description: Updated user metadata
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateUserMetadataRequest'
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User metadata updated
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Update User Metadata by UUID
+      tags:
+      - User
+  /users/content:
+    get:
+      description: Get Users Content
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ListUsersContentResponse'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Users Content
+      tags:
+      - User
+  /users/email/{email}:
+    get:
+      description: Get User by Email
+      parameters:
+      - description: User email
+        in: path
+        name: email
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get User by Email
+      tags:
+      - User
+  /users/id/{ID}:
+    get:
+      description: Get User by ID
+      parameters:
+      - description: User ID
+        in: path
+        name: ID
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get User by ID
+      tags:
+      - User
+  /users/ids-and-uuids:
+    get:
+      description: Get User IDs and UUIDs
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ListUserIdUuid'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get User IDs and UUIDs
+      tags:
+      - User
+  /users/metadata:
+    get:
+      description: Get Users Metadata
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.ListUsersMetadataResponse'
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get Users Metadata
+      tags:
+      - User
+  /users/name/{name}:
+    get:
+      description: Get User by Name
+      parameters:
+      - description: User name
+        in: path
+        name: name
+        required: true
+        type: string
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User found
+          schema:
+            type: string
+        "400":
+          description: Invalid request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      summary: Get User by Name
+      tags:
+      - User
+schemes:
+- http
+- https
+swagger: "2.0"

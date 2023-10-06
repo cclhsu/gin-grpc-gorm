@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package team;
+option go_package = "./team";
+// option go_package = "github.com/cclhsu/gin-grpc-gorm/team";
+
+import "google/protobuf/empty.proto";
+// import "google/protobuf/wrappers.proto";
+// import "google/protobuf/timestamp.proto";
+import "common.proto";
+
+service TeamService {
+  rpc ListTeamIdsAndUUIDs(google.protobuf.Empty) returns (ListTeamIdUuid) {}
+  rpc ListTeams(google.protobuf.Empty) returns (ListTeamsResponse) {}
+  rpc ListTeamsMetadata(google.protobuf.Empty)
+      returns (ListTeamsMetadataResponse) {}
+  rpc ListTeamsContent(google.protobuf.Empty)
+      returns (ListTeamsContentResponse) {}
+  rpc GetTeam(GetTeamByUuidRequest) returns (Team) {}
+  rpc CreateTeam(CreateTeamRequest) returns (Team) {}
+  rpc UpdateTeam(UpdateTeamRequest) returns (Team) {}
+  rpc DeleteTeam(GetTeamByUuidRequest) returns (Team) {}
+  rpc GetTeamById(GetTeamByIdRequest) returns (Team) {}
+  rpc GetTeamByName(GetTeamByNameRequest) returns (Team) {}
+  rpc GetTeamByEmail(GetTeamByEmailRequest) returns (Team) {}
+  rpc UpdateTeamMetadata(UpdateTeamMetadataRequest)
+      returns (TeamMetadataResponse) {}
+  rpc UpdateTeamContent(UpdateTeamContentRequest)
+      returns (TeamContentResponse) {}
+  rpc GetTeamMetadata(GetTeamByUuidRequest) returns (TeamMetadataResponse) {}
+  rpc GetTeamContent(GetTeamByUuidRequest) returns (TeamContentResponse) {}
+}
+
+message GetTeamByEmailRequest { string email = 1; }
+
+message GetTeamByIdRequest { string ID = 1; }
+
+message GetTeamByNameRequest { string name = 1; }
+
+message GetTeamByTeamNameRequest { string teamName = 1; }
+
+message GetTeamByUuidRequest { string UUID = 1; }
+
+message ListTeamIdUuid { repeated common.IdUuid teamIdUuids = 1; }
+
+message ListTeamsResponse { repeated Team teams = 1; }
+
+message ListTeamsMetadataResponse {
+  repeated TeamMetadataResponse teamMetadataResponses = 1;
+}
+
+message ListTeamsContentResponse {
+  repeated TeamContentResponse teamContentResponses = 1;
+}
+
+message CreateTeamRequest {
+  string ID = 1;
+  string UUID = 2;
+  TeamMetadata metadata = 3;
+  TeamContent content = 4;
+}
+
+message UpdateTeamRequest {
+  string UUID = 1;
+  TeamMetadata metadata = 2;
+  TeamContent content = 3;
+}
+
+message UpdateTeamMetadataRequest {
+  string UUID = 1;
+  TeamMetadata metadata = 2;
+}
+
+message UpdateTeamContentRequest {
+  string UUID = 1;
+  TeamContent content = 2;
+}
+
+message TeamMetadataResponse {
+  string ID = 1;
+  string UUID = 2;
+  TeamMetadata metadata = 3;
+}
+
+message TeamContentResponse {
+  string ID = 1;
+  string UUID = 2;
+  TeamContent content = 3;
+}
+
+message Team {
+  string ID = 1;
+  string UUID = 2;
+  TeamMetadata metadata = 3;
+  TeamContent content = 4;
+}
+
+message TeamMetadata {
+  string name = 1;
+  common.CommonDate dates = 2;
+}
+
+message TeamContent {
+  string email = 1;
+  repeated common.IdUuid members = 2;
+  common.IdUuid productOwner = 3;
+  common.IdUuid scrumMaster = 4;
+}

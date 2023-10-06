@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "team.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TeamService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "commonCommonDate": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "updatedBy": {
+          "type": "string"
+        },
+        "startedAt": {
+          "type": "string"
+        },
+        "startedBy": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "completedAt": {
+          "type": "string"
+        },
+        "completedBy": {
+          "type": "string"
+        }
+      }
+    },
+    "commonIdUuid": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "teamListTeamIdUuid": {
+      "type": "object",
+      "properties": {
+        "teamIdUuids": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonIdUuid"
+          }
+        }
+      }
+    },
+    "teamListTeamsContentResponse": {
+      "type": "object",
+      "properties": {
+        "teamContentResponses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/teamTeamContentResponse"
+          }
+        }
+      }
+    },
+    "teamListTeamsMetadataResponse": {
+      "type": "object",
+      "properties": {
+        "teamMetadataResponses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/teamTeamMetadataResponse"
+          }
+        }
+      }
+    },
+    "teamListTeamsResponse": {
+      "type": "object",
+      "properties": {
+        "teams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/teamTeam"
+          }
+        }
+      }
+    },
+    "teamTeam": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/teamTeamMetadata"
+        },
+        "content": {
+          "$ref": "#/definitions/teamTeamContent"
+        }
+      }
+    },
+    "teamTeamContent": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonIdUuid"
+          }
+        },
+        "productOwner": {
+          "$ref": "#/definitions/commonIdUuid"
+        },
+        "scrumMaster": {
+          "$ref": "#/definitions/commonIdUuid"
+        }
+      }
+    },
+    "teamTeamContentResponse": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "content": {
+          "$ref": "#/definitions/teamTeamContent"
+        }
+      }
+    },
+    "teamTeamMetadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "dates": {
+          "$ref": "#/definitions/commonCommonDate"
+        }
+      }
+    },
+    "teamTeamMetadataResponse": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/teamTeamMetadata"
+        }
+      }
+    }
+  }
+}

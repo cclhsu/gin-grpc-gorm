@@ -1,0 +1,407 @@
+@startuml
+
+allowmixing
+
+package "Microservice Architecture" {
+    package "GRPC Microservice" {
+        package "ServiceServer" {
+            class TeamServiceServer {
+                - teamService: TeamService
+                + listTeamIdsAndUUIDs(): [TeamIdUuidDTO]
+                + listTeams(): [TeamResponseDTO]
+                + listTeamsWithMetadata(): [TeamMetadataResponseDTO]
+                + listTeamsWithContent(): [TeamContentResponseDTO]
+                + getTeam(uuid: string): TeamResponseDTO
+                + createTeam(createTeamRequestDTO: CreateTeamRequestDTO): TeamResponseDTO
+                + updateTeam(uuid: string, updateTeamRequestDTO: UpdateTeamRequestDTO): TeamResponseDTO
+                + deleteTeam(uuid: string): TeamResponseDTO
+                + getTeamByID(ID: string): TeamResponseDTO
+                + getTeamByName(name: string): TeamResponseDTO
+                + getTeamByEmail(email: string): TeamResponseDTO
+                + updateTeamMetadata(
+                    uuid: string,
+                    updateTeamMetadataRequestDTO: UpdateTeamMetadataRequestDTO,
+                ): TeamMetadataResponseDTO
+                + updateTeamContent(
+                    uuid: string,
+                    updateTeamContentRequestDTO: UpdateTeamContentRequestDTO,
+                ): TeamContentResponseDTO
+                + getTeamMetadata(uuid: string): TeamMetadataResponseDTO
+                + getTeamContent(uuid: string): TeamContentResponseDTO
+            }
+
+            ' class "CreateTeamRequestDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: TeamMetadataDTO
+            '     + content: TeamContentDTO
+            ' }
+
+            ' class "GetTeamByEmailRequestDTO" {
+            '     + email: string
+            ' }
+
+            ' class "GetTeamByIdRequestDTO" {
+            '     + ID: string
+            ' }
+
+            ' class "GetTeamByUuidRequestDTO" {
+            '     + UUID: string
+            ' }
+
+            ' class "ListTeamResponseDTO" {
+            '     + teams: TeamResponseDTO[]
+            ' }
+
+            ' class "TeamContentResponseDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + content: TeamContentDTO
+            ' }
+
+            ' class "TeamContentDTO" {
+            '     + email: string
+            '     + members: IdUuidDTO[]
+            '     + productOwner: IdUuidDTO
+            '     + scrumMaster: IdUuidDTO
+            ' }
+
+            ' class "TeamIdUuidDTO" {
+            '     + ID: string
+            '     + UUID: string
+            ' }
+
+            ' class "TeamMetadataResponseDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: TeamMetadataDTO
+            ' }
+
+            ' class "TeamMetadataDTO" {
+            '     + name: string
+            '     + dates: CommonDateDTO
+            ' }
+
+            ' class "TeamResponseDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: TeamMetadataDTO
+            '     + content: TeamContentDTO
+            ' }
+
+            ' class "TeamDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: TeamMetadataDTO
+            '     + content: TeamContentDTO
+            ' }
+
+            ' class "UpdateTeamContentRequestDTO" {
+            '     + UUID: string
+            '     + content: TeamContentDTO
+            ' }
+
+            ' class "UpdateTeamMetadataRequestDTO" {
+            '     + UUID: string
+            '     + metadata: TeamMetadataDTO
+            ' }
+
+            ' class "UpdateTeamRequestDTO" {
+            '     + UUID: string
+            '     + metadata: TeamMetadataDTO
+            '     + content: TeamContentDTO
+            ' }
+
+            ' class "EmailDTO" {
+            '     + email: string
+            ' }
+
+            ' class "PasswordDTO" {
+            '     + password: string
+            ' }
+
+            ' class "PhoneDTO" {
+            '     + phone: string
+            ' }
+
+            ' class "ProjectRoleDTO" {
+            '     + projectRole: PROJECT_ROLE_TYPES
+            ' }
+
+            ' class "ProjectRolesDTO" {
+            '     + projectRoles: PROJECT_ROLE_TYPES[]
+            ' }
+
+            ' class "ScrumRoleDTO" {
+            '     + scrumRole: SCRUM_ROLE_TYPES
+            ' }
+
+            ' class "ScrumRolesDTO" {
+            '     + scrumRoles: SCRUM_ROLE_TYPES[]
+            ' }
+
+            ' class "CommentDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + content: string
+            '     + updatedBy: string
+            '     + updatedAt: Date
+            ' }
+
+            ' class "CommonDateDTO" {
+            '     + createdAt: Date
+            '     + createdBy: string
+            '     + updatedAt: Date
+            '     + updatedBy: string
+            '     + startedAt?: Date
+            '     + startedBy?: string
+            '     + startDate?: Date
+            '     + endDate?: Date
+            '     + completedAt?: Date
+            '     + completedBy?: string
+            ' }
+
+            ' class "DurationDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + startDate: Date
+            '     + endDate: Date
+            ' }
+
+            ' class "IdUuidStatusDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + status: GENERAL_STATUS_TYPES
+            ' }
+
+            ' class "IdUuidDTO" {
+            '     + ID: string
+            '     + UUID: string
+            ' }
+
+            ' class "NameUrlDTO" {
+            '     + name: string
+            '     + url: string
+            ' }
+
+            ' class "PaginationDTO" {
+            '     + skip?: number
+            '     + take?: number
+            ' }
+
+            ' class "RelationDTO" {
+            '     + UUID: string
+            '     + relationType: RELATION_TYPES
+            '     + sourceUUID: string
+            '     + targetUUID: string
+            '     + createdAt: Date
+            '     + updatedAt: Date
+            ' }
+        }
+
+        package "Middleware" {
+            class AuthMiddleware {
+                + authenticateRequest(request: HttpRequest): bool
+                + validateToken(token: string): bool
+                + extractTeamFromToken(token: string): Team
+            }
+        }
+
+        package "Service" {
+            class TeamService {
+                - teamCache: TeamCache
+                - teamRepository: TeamRepository
+                + listTeamIdsAndUUIDs(): [TeamIdUuidDTO]
+                + listTeams(): [TeamResponseDTO]
+                + listTeamsWithMetadata(): [TeamMetadataResponseDTO]
+                + listTeamsWithContent(): [TeamContentResponseDTO]
+                + getTeam(uuid: string): TeamResponseDTO
+                + createTeam(createTeamRequestDTO: CreateTeamRequestDTO): TeamResponseDTO
+                + updateTeam(uuid: string, updateTeamRequestDTO: UpdateTeamRequestDTO): TeamResponseDTO
+                + deleteTeam(uuid: string): TeamResponseDTO
+                + getTeamByID(ID: string): TeamResponseDTO
+                + getTeamByName(name: string): TeamResponseDTO
+                + getTeamByEmail(email: string): TeamResponseDTO
+                + updateTeamMetadata(
+                    uuid: string,
+                    updateTeamMetadataRequestDTO: UpdateTeamMetadataRequestDTO,
+                ): TeamMetadataResponseDTO
+                + updateTeamContent(
+                    uuid: string,
+                    updateTeamContentRequestDTO: UpdateTeamContentRequestDTO,
+                ): TeamContentResponseDTO
+                + getTeamMetadata(uuid: string): TeamMetadataResponseDTO
+                + getTeamContent(uuid: string): TeamContentResponseDTO
+            }
+        }
+
+        package "Cache" {
+            class TeamCache {
+                + listTeamIdsAndUUIDs(): [TeamIdUuidDTO]
+                + listTeams(): [TeamResponseDTO]
+                + listTeamsWithMetadata(): [TeamMetadataResponseDTO]
+                + listTeamsWithContent(): [TeamContentResponseDTO]
+                + getTeam(uuid: string): TeamResponseDTO
+                + createTeam(createTeamRequestDTO: CreateTeamRequestDTO): TeamResponseDTO
+                + updateTeam(uuid: string, updateTeamRequestDTO: UpdateTeamRequestDTO): TeamResponseDTO
+                + deleteTeam(uuid: string): TeamResponseDTO
+                + getTeamByID(ID: string): TeamResponseDTO
+                + getTeamByName(name: string): TeamResponseDTO
+                + getTeamByEmail(email: string): TeamResponseDTO
+                + updateTeamMetadata(
+                    uuid: string,
+                    updateTeamMetadataRequestDTO: UpdateTeamMetadataRequestDTO,
+                ): TeamMetadataResponseDTO
+                + updateTeamContent(
+                    uuid: string,
+                    updateTeamContentRequestDTO: UpdateTeamContentRequestDTO,
+                ): TeamContentResponseDTO
+                + getTeamMetadata(uuid: string): TeamMetadataResponseDTO
+                + getTeamContent(uuid: string): TeamContentResponseDTO
+            }
+        }
+
+        package "Repository" {
+            class TeamRepository {
+                + listTeamIdsAndUUIDs(): [TeamIdUuidDTO]
+                + listTeams(): [TeamResponseDTO]
+                + listTeamsWithMetadata(): [TeamMetadataResponseDTO]
+                + listTeamsWithContent(): [TeamContentResponseDTO]
+                + getTeam(uuid: string): TeamResponseDTO
+                + createTeam(createTeamRequestDTO: CreateTeamRequestDTO): TeamResponseDTO
+                + updateTeam(uuid: string, updateTeamRequestDTO: UpdateTeamRequestDTO): TeamResponseDTO
+                + deleteTeam(uuid: string): TeamResponseDTO
+                + getTeamByID(ID: string): TeamResponseDTO
+                + getTeamByName(name: string): TeamResponseDTO
+                + getTeamByEmail(email: string): TeamResponseDTO
+                + updateTeamMetadata(
+                    uuid: string,
+                    updateTeamMetadataRequestDTO: UpdateTeamMetadataRequestDTO,
+                ): TeamMetadataResponseDTO
+                + updateTeamContent(
+                    uuid: string,
+                    updateTeamContentRequestDTO: UpdateTeamContentRequestDTO,
+                ): TeamContentResponseDTO
+                + getTeamMetadata(uuid: string): TeamMetadataResponseDTO
+                + getTeamContent(uuid: string): TeamContentResponseDTO
+            }
+
+            ' !define TABLE_COLUMNS(COLUMN_LIST)
+            ' class TeamTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: TeamMetadataTable
+            '     + content: TeamContentTable
+            ' }
+
+            ' class TeamMetadataTable {
+            '     + name: string
+            '     + dates: CommonDateTable
+            ' }
+
+            ' class TeamContentTable {
+            '     + email: string
+            '     + members: IdUuidTable[]
+            '     + productOwner: IdUuidTable
+            '     + scrumMaster: IdUuidTable
+            ' }
+
+            ' class CommonDateTable {
+            '     + createdAt: Date
+            '     + createdBy: string
+            '     + updatedAt: Date
+            '     + updatedBy: string
+            '     + startedAt?: Date
+            '     + startedBy?: string
+            '     + startDate?: Date
+            '     + endDate?: Date
+            '     + completedAt?: Date
+            '     + completedBy?: string
+            ' }
+
+            ' class CommentTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + content: string
+            '     + updatedBy: string
+            '     + updatedAt: Date
+            ' }
+
+            ' class DurationTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + startDate: Date
+            '     + endDate: Date
+            ' }
+
+            ' class IdUuidStatusTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + status: GENERAL_STATUS_TYPES
+            ' }
+
+            ' class IdUuidTable {
+            '     + ID: string
+            '     + UUID: string
+            ' }
+
+            ' class NameUrlTable {
+            '     + name: string
+            '     + url: string
+            ' }
+
+            ' class PaginationTable {
+            '     + skip?: number
+            '     + take?: number
+            ' }
+
+            ' class RelationTable {
+            '     + UUID: string
+            '     + relationType: RELATION_TYPES
+            '     + sourceUUID: string
+            '     + targetUUID: string
+            '     + createdAt: Date
+            '     + updatedAt: Date
+            ' }
+        }
+
+        TeamServiceServer --> TeamService
+        TeamServiceServer --> AuthMiddleware
+        AuthMiddleware --> TeamServiceServer
+        TeamService --> TeamRepository
+        TeamService --> TeamCache
+    }
+
+    TeamService -down-> OtherMicroservice1
+
+    package "Other Microservice 1" as OtherMicroservice1 {
+        ' // Other Microservice 1 components
+    }
+
+    queue MessageQueue <<Queue>>
+    MessageQueue .up.> TeamService : <<Consumer>>
+
+    package "Log Aggregation" {
+        class LogAggregator {
+            - log: Log
+            - auditLog: AuditLog
+        }
+
+        ' class AuditLog {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+
+        ' class Log {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+    }
+
+    TeamServiceServer --> LogAggregator : <<Sends Audit Log>>
+    TeamCache --> LogAggregator : <<Sends Audit Log>>
+    TeamRepository --> LogAggregator : <<Sends Audit Log>>
+    TeamService --> LogAggregator : <<Sends Log>>
+}
+
+@enduml

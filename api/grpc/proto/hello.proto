@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package hello;
+option go_package = "./hello";
+// option go_package = "github.com/cclhsu/gin-grpc-gorm/hello";
+
+import "google/protobuf/empty.proto";
+// import "google/protobuf/field_mask.proto";
+
+service HelloService {
+  rpc GetHelloString(google.protobuf.Empty) returns (HelloStringResponse);
+  rpc GetHelloJson(google.protobuf.Empty) returns (HelloJsonResponse);
+}
+
+message HelloStringResponse {}
+
+message Data { string message = 1; }
+message HelloJsonResponse { Data data = 1; }
+// message HelloJsonResponse {
+//   message Data { string message = 1; }
+//   Data data = 1;
+// }

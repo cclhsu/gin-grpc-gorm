@@ -1,0 +1,127 @@
+@startuml
+
+allowmixing
+
+package "Microservice Architecture" {
+    package "GRPC Microservice" {
+        package "ServiceServer" {
+            class HealthServiceServer {
+                - healthService: HealthService
+                + GET /health/healthy(token: string): HealthResponseDTO
+                + GET /health/live(token: string): HealthResponseDTO
+                + GET /health/ready(token: string): HealthResponseDTO
+                ' + GET /health/healthy/service/{service}(token: string): HealthResponseDTO
+                ' + GET /health/live/service/{service}(token: string): HealthResponseDTO
+                ' + GET /health/ready/service/{service}(token: string): HealthResponseDTO
+            }
+
+            class HealthRequestDTO {
+                - service: string
+            }
+
+            enum ServingStatus {
+                UNKNOWN
+                SERVING
+                NOT_SERVING
+            }
+
+            class HealthResponseDTO {
+                - service: string
+                - status: ServingStatus
+                - message: string
+            }
+
+            HealthServiceServer -down[hidden]- HealthRequestDTO
+            HealthServiceServer -down[hidden]- HealthResponseDTO
+            HealthRequestDTO -up[hidden]- HealthServiceServer
+            HealthResponseDTO -up[hidden]- HealthServiceServer
+            ServingStatus -up[hidden]- HealthResponseDTO
+            HealthResponseDTO -down[hidden]- ServingStatus
+        }
+
+        package "Middleware" {
+            class AuthMiddleware {
+                + authenticateRequest(request: HttpRequest): bool
+                + validateToken(token: string): bool
+                + extractHealthFromToken(token: string): Health
+            }
+        }
+
+        package "Service" {
+            class HealthService {
+                - healthCache: HealthCache
+                - healthRepository: HealthRepository
+                + isHealthy(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+                + isLive(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+                + isReady(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+            }
+        }
+
+        package "Cache" {
+            class HealthCache {
+                + isHealthy(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+                + isLive(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+                + isReady(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+            }
+        }
+
+        package "Repository" {
+            class HealthRepository {
+                + isHealthy(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+                + isLive(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+                + isReady(healthRequestDTO: HealthRequestDTO): HealthResponseDTO
+            }
+
+            ' !define TABLE_COLUMNS(COLUMN_LIST)
+            ' class Health {
+            '     + UUID: ID [PK]
+            '     + CreateTimestamp: DateTime
+            '     + UpdateTimestamp: DateTime
+            ' }
+        }
+
+        ' ServiceServer -down[hidden]- Service
+        ' ServiceServer -down[hidden]- Middleware
+        ' Service -up[hidden]- ServiceServer
+        ' Middleware -up[hidden]- ServiceServer
+
+        HealthServiceServer -down-> HealthService
+        HealthServiceServer -down-> AuthMiddleware
+        AuthMiddleware -up-> HealthServiceServer
+        HealthService --> HealthRepository
+        HealthService --> HealthCache
+    }
+
+    HealthService -down-> OtherMicroservice1
+
+    package "Other Microservice 1" as OtherMicroservice1 {
+        ' // Other Microservice 1 components
+    }
+
+    queue MessageQueue <<Queue>>
+    MessageQueue .up.> HealthService : <<Consumer>>
+
+    package "Log Aggregation" {
+        class LogAggregator {
+            - log: Log
+            - auditLog: AuditLog
+        }
+
+        ' class AuditLog {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+
+        ' class Log {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+    }
+
+    HealthServiceServer --> LogAggregator : <<Sends Audit Log>>
+    HealthCache --> LogAggregator : <<Sends Audit Log>>
+    HealthRepository --> LogAggregator : <<Sends Audit Log>>
+    HealthService --> LogAggregator : <<Sends Log>>
+}
+
+@enduml

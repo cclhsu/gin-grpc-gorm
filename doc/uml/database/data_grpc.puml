@@ -1,0 +1,147 @@
+@startuml
+
+package "auth" {
+    class AuthService {
+        + Login(LoginRequest): LoginResponse
+        + GetProtectedData(SecuredRequest): SecuredResponse
+        + GetProfile(SecuredRequest): GetUserProfileResponse
+        + Logout(SecuredRequest): LogoutResponse
+    }
+
+    class LoginRequest {
+        - username: string
+        - password: string
+    }
+
+    class LoginResponse {
+        - token: string
+    }
+
+    class SecuredRequest {
+        - token: string
+    }
+
+    class SecuredResponse {
+        - success: bool
+        - message: string
+        - errorCode: int32
+    }
+
+    class GetUserProfileResponse {
+        - UUID: ID
+        - lastName: string
+        - firstName: string
+        - role: string
+        - dateOfBirth: string
+        - email: string
+        - phoneNumber: string
+        - username: string
+    }
+
+    class LogoutResponse {
+        - message: string
+        - user: string
+    }
+}
+
+package "health" {
+    class HealthService {
+        + Check(HealthRequest): HealthResponse
+    }
+
+    class HealthRequest {
+        - service: string
+    }
+
+    enum ServingStatus {
+        UNKNOWN
+        SERVING
+        NOT_SERVING
+    }
+
+    class HealthResponse {
+        - status: ServingStatus
+    }
+}
+
+package "hello" {
+    class HelloService {
+        + GetHelloString(google.protobuf.Empty): HelloStringResponse
+        + GetHelloJson(google.protobuf.Empty): HelloJsonResponse
+    }
+
+    class HelloStringResponse {}
+    class Data {
+        - message: string
+    }
+    class HelloJsonResponse {
+        - data: Data
+    }
+}
+
+package "user" {
+    class UserService {
+        + CreateUser(CreateUserRequest): UserResponse
+        + ListUsers(google.protobuf.Empty): ListUsersResponse
+        + GetUser(UserIdRequest): UserResponse
+        + UpdateUser(UpdateUserRequest): UserResponse
+        + GetUserByUsername(UsernameRequest): UserResponse
+        + GetUserByEmail(EmailRequest): UserResponse
+        + DeleteUser(UserIdRequest): UserResponse
+    }
+
+    class UserIdRequest {
+        - UUID: ID
+    }
+
+    class UsernameRequest {
+        - username: string
+    }
+
+    class EmailRequest {
+        - email: string
+    }
+
+    class CreateUserRequest {
+        - UUID: ID
+        - lastName: string
+        - firstName: string
+        - role: string
+        - dateOfBirth: string
+        - email: string
+        - phoneNumber: string
+        - username: string
+        - password: string
+    }
+
+    class UpdateUserRequest {
+        - UUID: ID
+        - lastName: string
+        - firstName: string
+        - role: string
+        - dateOfBirth: string
+        - email: string
+        - phoneNumber: string
+        - username: string
+        - password: string
+    }
+
+    class UserResponse {
+        - UUID: ID
+        - lastName: string
+        - firstName: string
+        - role: string
+        - dateOfBirth: string
+        - email: string
+        - phoneNumber: string
+        - username: string
+        - createTimestamp: string
+        - updateTimestamp: string
+    }
+
+    class ListUsersResponse {
+        - users: repeated UserResponse
+    }
+}
+
+@enduml

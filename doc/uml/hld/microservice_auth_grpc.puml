@@ -1,0 +1,168 @@
+@startuml
+
+allowmixing
+
+package "Microservice Architecture" {
+    package "GRPC Microservice" {
+        package "ServiceServer" {
+            class AuthServiceServer {
+                - authService: AuthService
+                - authMiddleware: AuthMiddleware
+                + Register(createUserRequestDTO: CreateUserRequestDTO): RegisterResponseDTO
+                + Login(loginRequestDTO: LoginRequestDTO): LoginResponseDTO
+                + Logout(uuid: string): LogoutResponseDTO
+                + GetProfile(uuid: string): GetUserProfileResponseDTO
+                + GetProtectedData(uuid: string): SecuredResponseDTO
+            }
+
+            ' class "CreateUserRequestDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + metadata: UserMetadataDTO!
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "UserDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + metadata: UserMetadataDTO!
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "UserMetadataDTO" {
+            '     + name: String!
+            '     + dates: CommonDateDTO!
+            ' }
+
+            ' class "UserContentDTO" {
+            '     + email: String!
+            '     + phone: String!
+            '     + lastName: String!
+            '     + firstName: String!
+            '     + projectRoles: [PROJECT_ROLE_TYPES]!
+            '     + scrumRoles: [SCRUM_ROLE_TYPES]!
+            '     + password: String!
+            ' }
+
+            ' class "CommonDateDTO" {
+            '     + createdAt: Date!
+            '     + createdBy: String!
+            '     + updatedAt: Date!
+            '     + updatedBy: String!
+            '     + startedAt: Date
+            '     + startedBy: String
+            '     + startDate: Date
+            '     + endDate: Date
+            '     + completedAt: Date
+            '     + completedBy: String
+            ' }
+
+            ' class "RegistrationResponseDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + email: String!
+            ' }
+
+            ' class "LoginRequestDTO" {
+            '     + ID: String!
+            '     + email: String!
+            '     + password: String!
+            ' }
+
+            ' class "LoginResponseDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + email: String!
+            '     + token: String!
+            ' }
+
+            ' class "LogoutResponseDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + email: String!
+            ' }
+
+            ' class "SecuredResponseDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + email: String!
+            '     + token: String!
+            '     + securedData: String!
+            ' }
+
+            ' class "GetUserProfileResponseDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + email: String!
+            '     + token: String!
+            '     + securedData: String!
+            ' }
+
+            ' class "GetProtectedDataResponseDTO" {
+            '     + ID: String!
+            '     + UUID: String!
+            '     + email: String!
+            '     + token: String!
+            '     + securedData: String!
+            ' }
+        }
+
+        package "Middleware" {
+            class AuthMiddleware {
+                + authenticateRequestDTO(requestdto: HttpRequestDTO): bool
+                + validateToken(token: string): bool
+                + extractAuthFromToken(token: string): Auth
+            }
+        }
+
+        package "Service" {
+            class AuthService {
+                - authCache: AuthCache
+                - authRepository: AuthRepository
+                - userService: UserService
+                + register(createUserRequestDTO: CreateUserRequestDTO): Promise<RegistrationResponseDTO>
+                + login(loginRequestDTO: LoginRequestDTO): Promise<LoginResponseDTO>
+                + logout(uuid: string): Promise<void>
+                + getProfile(uuid: string): Promise<UserDTO>
+                + validateUser(uuid: string, password: string): Promise<UserDTO>
+                + validateUserByID(ID: string, password: string): Promise<UserDTO>
+                + validateUserByEmail(email: string, password: string): Promise<UserDTO>
+            }
+        }
+
+        AuthServiceServer --> AuthService
+        AuthServiceServer --> AuthMiddleware
+        AuthMiddleware --> AuthServiceServer
+    }
+
+    AuthService -down-> UserService
+
+    package "User Microservice" as UserService {
+        ' // Other Microservice 1 components
+    }
+
+    ' queue MessageQueue <<Queue>>
+    ' MessageQueue .up.> AuthService : <<Consumer>>
+
+    package "Log Aggregation" {
+        class LogAggregator {
+            - log: Log
+            - auditLog: AuditLog
+        }
+
+        ' class "AuditLog" {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+
+        ' class "Log" {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+    }
+
+    AuthServiceServer --> LogAggregator : <<Sends Audit Log>>
+    AuthService --> LogAggregator : <<Sends Log>>
+}
+
+@enduml

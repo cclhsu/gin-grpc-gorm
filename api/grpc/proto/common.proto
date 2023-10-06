@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package common;
+option go_package = "./common";
+// option go_package = "github.com/cclhsu/gin-grpc-gorm/common";
+
+// import "google/protobuf/empty.proto";
+// import "google/protobuf/field_mask.proto";
+// import "google/protobuf/timestamp.proto";
+
+message Comment {
+  string ID = 1;
+  string UUID = 2;
+  string content = 3;
+  string updatedBy = 4;
+  string updatedAt = 5;
+}
+
+message CommonDate {
+  string createdAt = 1;
+  string createdBy = 2;
+  string updatedAt = 3;
+  string updatedBy = 4;
+  optional string startedAt = 5;
+  optional string startedBy = 6;
+  optional string startDate = 7;
+  optional string endDate = 8;
+  optional string completedAt = 9;
+  optional string completedBy = 10;
+}
+
+message Duration {
+  string ID = 1;
+  string UUID = 2;
+  string startDate = 3;
+  string endDate = 4;
+}
+
+message IdUuidStatus {
+  string ID = 1;
+  string UUID = 2;
+  GENERAL_STATUS_TYPES status = 3;
+}
+
+message IdUuid {
+  string ID = 1;
+  string UUID = 2;
+}
+
+message NameUrl {
+  string name = 1;
+  string url = 2;
+}
+
+message Pagination {
+  int32 skip = 1;
+  int32 take = 2;
+}
+
+message Relation {
+  string UUID = 1;
+  RELATION_TYPES relationType = 2;
+  string sourceUUID = 3;
+  string targetUUID = 4;
+  string createdAt = 5;
+  string updatedAt = 6;
+}
+
+enum GENERAL_STATUS_TYPES {
+  GENERAL_STATUS_TYPES_UNSPECIFIED = 0;
+  GENERAL_STATUS_TYPES_INACTIVE = 1;
+  GENERAL_STATUS_TYPES_ACTIVE = 2;
+  GENERAL_STATUS_TYPES_PLANNED = 3;
+  GENERAL_STATUS_TYPES_TODO = 4;
+  GENERAL_STATUS_TYPES_IN_PROGRESS = 5;
+  GENERAL_STATUS_TYPES_DONE = 6;
+  GENERAL_STATUS_TYPES_COMPLETED = 7;
+  GENERAL_STATUS_TYPES_CANCELLED = 8;
+}
+
+enum PROJECT_ROLE_TYPES {
+  PROJECT_ROLE_TYPES_UNSPECIFIED = 0;
+  PROJECT_ROLE_TYPES_PM = 1;
+  PROJECT_ROLE_TYPES_EM = 2;
+  PROJECT_ROLE_TYPES_DEV = 3;
+  PROJECT_ROLE_TYPES_QA = 4;
+  PROJECT_ROLE_TYPES_BA = 5;
+  PROJECT_ROLE_TYPES_UX = 6;
+  PROJECT_ROLE_TYPES_O = 7;
+}
+
+enum RELATION_TYPES {
+  RELATION_TYPES_UNSPECIFIED = 0;
+  RELATION_TYPES_PARENT = 1;
+  RELATION_TYPES_SUBTASKS = 2;
+  RELATION_TYPES_PREDECESSORS = 3;
+  RELATION_TYPES_SUCCESSORS = 4;
+  RELATION_TYPES_RELATES_TO = 5;
+  RELATION_TYPES_BLOCKED_BY = 6;
+}
+
+enum SCRUM_ROLE_TYPES {
+  SCRUM_ROLE_TYPES_UNSPECIFIED = 0;
+  SCRUM_ROLE_TYPES_PO = 1;
+  SCRUM_ROLE_TYPES_SM = 2;
+  SCRUM_ROLE_TYPES_MEMBER = 3;
+  SCRUM_ROLE_TYPES_O = 4;
+}

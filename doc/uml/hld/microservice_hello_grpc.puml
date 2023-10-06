@@ -1,0 +1,66 @@
+@startuml
+
+allowmixing
+
+package "Microservice Architecture" {
+    package "GRPC Microservice" {
+        package "ServiceServer" {
+            class HelloServiceServer {
+                - helloService: HelloService
+                + GetHelloString(google.protobuf.Empty): HelloStringResponse
+                + GetHelloJson(google.protobuf.Empty): HelloJsonResponse
+            }
+        }
+
+        package "Middleware" {
+            class AuthMiddleware {
+                + authenticateRequest(request: HttpRequest): bool
+                + validateToken(token: string): bool
+                + extractHelloFromToken(token: string): Hello
+            }
+        }
+
+        package "Service" {
+            class HelloService {
+                + getHelloString(uuid: ID): HelloStringResponseDTO
+                + getHelloJson(uuid: ID): HelloJsonResponseDTO
+            }
+        }
+
+        HelloServiceServer --> HelloService
+        HelloServiceServer --> AuthMiddleware
+        AuthMiddleware --> HelloServiceServer
+
+        ' class HelloStringResponseDTO
+
+        ' class DataDTO {
+        '     - message: string
+        ' }
+
+        ' class HelloJsonResponseDTO {
+        '     - data: DataDTO
+        ' }
+    }
+
+    package "Log Aggregation" {
+        class LogAggregator {
+            - log: Log
+            - auditLog: AuditLog
+        }
+
+        ' class AuditLog {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+
+        ' class Log {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+    }
+
+    HelloHelloServiceServer --> LogAggregator : <<Sends Audit Log>>
+    HelloService --> LogAggregator : <<Sends Log>>
+}
+
+@enduml

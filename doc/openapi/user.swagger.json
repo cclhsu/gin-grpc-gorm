@@ -1,0 +1,256 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "UserService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "commonCommonDate": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "updatedBy": {
+          "type": "string"
+        },
+        "startedAt": {
+          "type": "string"
+        },
+        "startedBy": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "completedAt": {
+          "type": "string"
+        },
+        "completedBy": {
+          "type": "string"
+        }
+      }
+    },
+    "commonIdUuid": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        }
+      }
+    },
+    "commonPROJECT_ROLE_TYPES": {
+      "type": "string",
+      "enum": [
+        "PROJECT_ROLE_TYPES_UNSPECIFIED",
+        "PROJECT_ROLE_TYPES_PM",
+        "PROJECT_ROLE_TYPES_EM",
+        "PROJECT_ROLE_TYPES_DEV",
+        "PROJECT_ROLE_TYPES_QA",
+        "PROJECT_ROLE_TYPES_BA",
+        "PROJECT_ROLE_TYPES_UX",
+        "PROJECT_ROLE_TYPES_O"
+      ],
+      "default": "PROJECT_ROLE_TYPES_UNSPECIFIED"
+    },
+    "commonSCRUM_ROLE_TYPES": {
+      "type": "string",
+      "enum": [
+        "SCRUM_ROLE_TYPES_UNSPECIFIED",
+        "SCRUM_ROLE_TYPES_PO",
+        "SCRUM_ROLE_TYPES_SM",
+        "SCRUM_ROLE_TYPES_MEMBER",
+        "SCRUM_ROLE_TYPES_O"
+      ],
+      "default": "SCRUM_ROLE_TYPES_UNSPECIFIED"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "userListUserIdUuid": {
+      "type": "object",
+      "properties": {
+        "userIdUuids": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonIdUuid"
+          }
+        }
+      }
+    },
+    "userListUsersContentResponse": {
+      "type": "object",
+      "properties": {
+        "userContentResponses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/userUserContentResponse"
+          }
+        }
+      }
+    },
+    "userListUsersMetadataResponse": {
+      "type": "object",
+      "properties": {
+        "userMetadataResponses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/userUserMetadataResponse"
+          }
+        }
+      }
+    },
+    "userListUsersResponse": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/userUser"
+          }
+        }
+      }
+    },
+    "userUser": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/userUserMetadata"
+        },
+        "content": {
+          "$ref": "#/definitions/userUserContent"
+        }
+      }
+    },
+    "userUserContent": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "projectRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonPROJECT_ROLE_TYPES"
+          }
+        },
+        "scrumRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonSCRUM_ROLE_TYPES"
+          }
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "userUserContentResponse": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "content": {
+          "$ref": "#/definitions/userUserContent"
+        }
+      }
+    },
+    "userUserMetadata": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "dates": {
+          "$ref": "#/definitions/commonCommonDate"
+        }
+      }
+    },
+    "userUserMetadataResponse": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/userUserMetadata"
+        }
+      }
+    }
+  }
+}

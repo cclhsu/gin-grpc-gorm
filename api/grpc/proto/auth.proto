@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package auth;
+option go_package = "./auth";
+// option go_package = "github.com/cclhsu/gin-grpc-gorm/auth";
+
+// import "google/protobuf/timestamp.proto";
+// import "google/protobuf/empty.proto";
+import "common.proto";
+import "user.proto";
+
+service AuthService {
+  rpc Register(user.CreateUserRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Logout(LogoutRequest) returns (LogoutResponse);
+  rpc GetProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+  rpc GetProtectedData(GetProtectedDataRequest) returns (SecuredResponse);
+}
+
+// message CreateUserRequest {
+//   string ID = 1;
+//   string UUID = 2;
+//   UserMetadata metadata = 3;
+//   UserContent content = 4;
+// }
+
+message User {
+  string ID = 1;
+  string UUID = 2;
+  UserMetadata metadata = 3;
+  UserContent content = 4;
+}
+
+message UserMetadata {
+  string name = 1;
+  common.CommonDate dates = 2;
+}
+
+message UserContent {
+  string email = 1;
+  string phone = 2;
+  string lastName = 3;
+  string firstName = 4;
+  repeated string projectRoles = 5;
+  repeated string scrumRoles = 6;
+  string password = 7;
+}
+
+message RegisterResponse {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+}
+
+message LoginRequest {
+  string ID = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message LoginResponse {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+  string token = 4;
+}
+
+message LogoutRequest {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+  string token = 4;
+}
+
+message LogoutResponse {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+}
+
+message SecuredResponse {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+  string token = 4;
+  string securedData = 5;
+}
+
+message GetUserProfileRequest {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+  string token = 4;
+}
+
+message GetUserProfileResponse {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+  string token = 4;
+  string securedData = 5;
+}
+
+message GetProtectedDataRequest {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+  string token = 4;
+}
+
+message GetProtectedDataResponse {
+  string ID = 1;
+  string UUID = 2;
+  string email = 3;
+  string token = 4;
+  string securedData = 5;
+}

@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package user;
+option go_package = "./user";
+// option go_package = "github.com/cclhsu/gin-grpc-gorm/user";
+
+import "google/protobuf/empty.proto";
+// import "google/protobuf/wrappers.proto";
+// import "google/protobuf/timestamp.proto";
+import "common.proto";
+
+service UserService {
+  rpc ListUserIdsAndUUIDs(google.protobuf.Empty) returns (ListUserIdUuid) {}
+  rpc ListUsers(google.protobuf.Empty) returns (ListUsersResponse) {}
+  rpc ListUsersMetadata(google.protobuf.Empty)
+      returns (ListUsersMetadataResponse) {}
+  rpc ListUsersContent(google.protobuf.Empty)
+      returns (ListUsersContentResponse) {}
+  rpc GetUser(GetUserByUuidRequest) returns (User) {}
+  rpc CreateUser(CreateUserRequest) returns (User) {}
+  rpc UpdateUser(UpdateUserRequest) returns (User) {}
+  rpc DeleteUser(GetUserByUuidRequest) returns (User) {}
+  rpc GetUserById(GetUserByIdRequest) returns (User) {}
+  rpc GetUserByName(GetUserByUsernameRequest) returns (User) {}
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (User) {}
+  rpc UpdateUserMetadata(UpdateUserMetadataRequest)
+      returns (UserMetadataResponse) {}
+  rpc UpdateUserContent(UpdateUserContentRequest)
+      returns (UserContentResponse) {}
+  rpc GetUserMetadata(GetUserByUuidRequest) returns (UserMetadataResponse) {}
+  rpc GetUserContent(GetUserByUuidRequest) returns (UserContentResponse) {}
+}
+
+message GetUserByEmailRequest { string email = 1; }
+
+message GetUserByIdRequest { string ID = 1; }
+
+message GetUserByNameRequest { string name = 1; }
+
+message GetUserByUsernameRequest { string username = 1; }
+
+message GetUserByUuidRequest { string UUID = 1; }
+
+message ListUserIdUuid { repeated common.IdUuid userIdUuids = 1; }
+
+message ListUsersResponse { repeated User users = 1; }
+
+message ListUsersMetadataResponse {
+  repeated UserMetadataResponse userMetadataResponses = 1;
+}
+
+message ListUsersContentResponse {
+  repeated UserContentResponse userContentResponses = 1;
+}
+
+message CreateUserRequest {
+  string ID = 1;
+  string UUID = 2;
+  UserMetadata metadata = 3;
+  UserContent content = 4;
+}
+
+message UpdateUserRequest {
+  string UUID = 1;
+  UserMetadata metadata = 2;
+  UserContent content = 3;
+}
+
+message UpdateUserMetadataRequest {
+  string UUID = 1;
+  UserMetadata metadata = 2;
+}
+
+message UpdateUserContentRequest {
+  string UUID = 1;
+  UserContent content = 2;
+}
+
+message UserMetadataResponse {
+  string ID = 1;
+  string UUID = 2;
+  UserMetadata metadata = 3;
+}
+
+message UserContentResponse {
+  string ID = 1;
+  string UUID = 2;
+  UserContent content = 3;
+}
+
+message User {
+  string ID = 1;
+  string UUID = 2;
+  UserMetadata metadata = 3;
+  UserContent content = 4;
+}
+
+message UserMetadata {
+  string name = 1;
+  common.CommonDate dates = 2;
+}
+
+message UserContent {
+  string email = 1;
+  string phone = 2;
+  string firstName = 3;
+  string lastName = 4;
+  repeated common.PROJECT_ROLE_TYPES projectRoles = 5;
+  repeated common.SCRUM_ROLE_TYPES scrumRoles = 6;
+  string password = 7;
+}

@@ -1,0 +1,421 @@
+@startuml
+
+allowmixing
+
+package "Microservice Architecture" {
+    package "GRPC Microservice" {
+        package "ServiceServer" {
+            class UserServiceServer {
+                - userService: UserService
+                + listUserIdsAndUUIDs(): [UserIdUuidDTO]
+                + listUsers(): [UserResponseDTO]
+                + listUsersWithMetadata(): [UserMetadataResponseDTO]
+                + listUsersWithContent(): [UserContentResponseDTO]
+                + getUser(uuid: string): UserResponseDTO
+                + createUser(createUserRequestDTO: CreateUserRequestDTO): UserResponseDTO
+                + updateUser(uuid: string, updateUserRequestDTO: UpdateUserRequestDTO): UserResponseDTO
+                + deleteUser(uuid: string): UserResponseDTO
+                + getUserByID(ID: string): UserResponseDTO
+                + getUserByName(name: string): UserResponseDTO
+                + getUserByEmail(email: string): UserResponseDTO
+                + updateUserMetadata(
+                    uuid: string,
+                    updateUserMetadataRequestDTO: UpdateUserMetadataRequestDTO,
+                ): UserMetadataResponseDTO
+                + updateUserContent(
+                    uuid: string,
+                    updateUserContentRequestDTO: UpdateUserContentRequestDTO,
+                ): UserContentResponseDTO
+                + getUserMetadata(uuid: string): UserMetadataResponseDTO
+                + getUserContent(uuid: string): UserContentResponseDTO
+            }
+
+            ' class "CreateUserRequestDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: UserMetadataDTO
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "GetUserByEmailRequestDTO" {
+            '     + email: string
+            ' }
+
+            ' class "GetUserByIdRequestDTO" {
+            '     + ID: string
+            ' }
+
+            ' class "GetUserByNameRequestDTO" {
+            '     + name: string
+            ' }
+
+            ' class "GetUserByUsernameRequestDTO" {
+            '     + username: string
+            ' }
+
+            ' class "GetUserByUuidRequestDTO" {
+            '     + UUID: string
+            ' }
+
+            ' class "ListUserResponseDTO" {
+            '     + users: UserResponseDTO[]
+            ' }
+
+            ' class "UpdateUserContentRequestDTO" {
+            '     + UUID: string
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "UpdateUserMetadataRequestDTO" {
+            '     + UUID: string
+            '     + metadata: UserMetadataDTO
+            ' }
+
+            ' class "UpdateUserRequestDTO" {
+            '     + UUID: string
+            '     + metadata: UserMetadataDTO
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "UserContentResponseDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "UserContentDTO" {
+            '     + email: string
+            '     + phone: string
+            '     + firstName: string
+            '     + lastName: string
+            '     + projectRoles: PROJECT_ROLE_TYPES[]
+            '     + scrumRoles: SCRUM_ROLE_TYPES[]
+            '     + password: string
+            ' }
+
+            ' class "UserIdUuidDTO" {
+            '     + ID: string
+            '     + UUID: string
+            ' }
+
+            ' class "UserMetadataResponseDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: UserMetadataDTO
+            ' }
+
+            ' class "UserMetadataDTO" {
+            '     + name: string
+            '     + dates: CommonDateDTO
+            ' }
+
+            ' class "UserResponseDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: UserMetadataDTO
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "UserDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: UserMetadataDTO
+            '     + content: UserContentDTO
+            ' }
+
+            ' class "EmailDTO" {
+            '     + email: string
+            ' }
+
+            ' class "PasswordDTO" {
+            '     + password: string
+            ' }
+
+            ' class "PhoneDTO" {
+            '     + phone: string
+            ' }
+
+            ' class "ProjectRoleDTO" {
+            '     + projectRole: PROJECT_ROLE_TYPES
+            ' }
+
+            ' class "ProjectRolesDTO" {
+            '     + projectRoles: PROJECT_ROLE_TYPES[]
+            ' }
+
+            ' class "ScrumRoleDTO" {
+            '     + scrumRole: SCRUM_ROLE_TYPES
+            ' }
+
+            ' class "ScrumRolesDTO" {
+            '     + scrumRoles: SCRUM_ROLE_TYPES[]
+            ' }
+
+            ' class "CommentDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + content: string
+            '     + updatedBy: string
+            '     + updatedAt: Date
+            ' }
+
+            ' class "CommonDateDTO" {
+            '     + createdAt: Date
+            '     + createdBy: string
+            '     + updatedAt: Date
+            '     + updatedBy: string
+            '     + startedAt?: Date
+            '     + startedBy?: string
+            '     + startDate?: Date
+            '     + endDate?: Date
+            '     + completedAt?: Date
+            '     + completedBy?: string
+            ' }
+
+            ' class "DurationDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + startDate: Date
+            '     + endDate: Date
+            ' }
+
+            ' class "IdUuidStatusDTO" {
+            '     + ID: string
+            '     + UUID: string
+            '     + status: GENERAL_STATUS_TYPES
+            ' }
+
+            ' class "IdUuidDTO" {
+            '     + ID: string
+            '     + UUID: string
+            ' }
+
+            ' class "NameUrlDTO" {
+            '     + name: string
+            '     + url: string
+            ' }
+
+            ' class "PaginationDTO" {
+            '     + skip?: number
+            '     + take?: number
+            ' }
+
+            ' class "RelationDTO" {
+            '     + UUID: string
+            '     + relationType: RELATION_TYPES
+            '     + sourceUUID: string
+            '     + targetUUID: string
+            '     + createdAt: Date
+            '     + updatedAt: Date
+            ' }
+        }
+
+        package "Middleware" {
+            class AuthMiddleware {
+                + authenticateRequest(request: HttpRequest): bool
+                + validateToken(token: string): bool
+                + extractUserFromToken(token: string): User
+            }
+        }
+
+        package "Service" {
+            class UserService {
+                - userCache: UserCache
+                - userRepository: UserRepository
+                + listUserIdsAndUUIDs(): [UserIdUuidDTO]
+                + listUsers(): [UserResponseDTO]
+                + listUsersWithMetadata(): [UserMetadataResponseDTO]
+                + listUsersWithContent(): [UserContentResponseDTO]
+                + getUser(uuid: string): UserResponseDTO
+                + createUser(createUserRequestDTO: CreateUserRequestDTO): UserResponseDTO
+                + updateUser(uuid: string, updateUserRequestDTO: UpdateUserRequestDTO): UserResponseDTO
+                + deleteUser(uuid: string): UserResponseDTO
+                + getUserByID(ID: string): UserResponseDTO
+                + getUserByName(name: string): UserResponseDTO
+                + getUserByEmail(email: string): UserResponseDTO
+                + updateUserMetadata(
+                    uuid: string,
+                    updateUserMetadataRequestDTO: UpdateUserMetadataRequestDTO,
+                ): UserMetadataResponseDTO
+                + updateUserContent(
+                    uuid: string,
+                    updateUserContentRequestDTO: UpdateUserContentRequestDTO,
+                ): UserContentResponseDTO
+                + getUserMetadata(uuid: string): UserMetadataResponseDTO
+                + getUserContent(uuid: string): UserContentResponseDTO
+            }
+        }
+
+        package "Cache" {
+            class UserCache {
+                + listUserIdsAndUUIDs(): [UserIdUuidDTO]
+                + listUsers(): [UserResponseDTO]
+                + listUsersWithMetadata(): [UserMetadataResponseDTO]
+                + listUsersWithContent(): [UserContentResponseDTO]
+                + getUser(uuid: string): UserResponseDTO
+                + createUser(createUserRequestDTO: CreateUserRequestDTO): UserResponseDTO
+                + updateUser(uuid: string, updateUserRequestDTO: UpdateUserRequestDTO): UserResponseDTO
+                + deleteUser(uuid: string): UserResponseDTO
+                + getUserByID(ID: string): UserResponseDTO
+                + getUserByName(name: string): UserResponseDTO
+                + getUserByEmail(email: string): UserResponseDTO
+                + updateUserMetadata(
+                    uuid: string,
+                    updateUserMetadataRequestDTO: UpdateUserMetadataRequestDTO,
+                ): UserMetadataResponseDTO
+                + updateUserContent(
+                    uuid: string,
+                    updateUserContentRequestDTO: UpdateUserContentRequestDTO,
+                ): UserContentResponseDTO
+                + getUserMetadata(uuid: string): UserMetadataResponseDTO
+                + getUserContent(uuid: string): UserContentResponseDTO
+            }
+        }
+
+        package "Repository" {
+            class UserRepository {
+                + listUserIdsAndUUIDs(): [UserIdUuidDTO]
+                + listUsers(): [UserResponseDTO]
+                + listUsersWithMetadata(): [UserMetadataResponseDTO]
+                + listUsersWithContent(): [UserContentResponseDTO]
+                + getUser(uuid: string): UserResponseDTO
+                + createUser(createUserRequestDTO: CreateUserRequestDTO): UserResponseDTO
+                + updateUser(uuid: string, updateUserRequestDTO: UpdateUserRequestDTO): UserResponseDTO
+                + deleteUser(uuid: string): UserResponseDTO
+                + getUserByID(ID: string): UserResponseDTO
+                + getUserByName(name: string): UserResponseDTO
+                + getUserByEmail(email: string): UserResponseDTO
+                + updateUserMetadata(
+                    uuid: string,
+                    updateUserMetadataRequestDTO: UpdateUserMetadataRequestDTO,
+                ): UserMetadataResponseDTO
+                + updateUserContent(
+                    uuid: string,
+                    updateUserContentRequestDTO: UpdateUserContentRequestDTO,
+                ): UserContentResponseDTO
+                + getUserMetadata(uuid: string): UserMetadataResponseDTO
+                + getUserContent(uuid: string): UserContentResponseDTO
+            }
+
+            ' !define TABLE_COLUMNS(COLUMN_LIST)
+            ' class UserTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + metadata: UserMetadataTable
+            '     + content: UserContentTable
+            ' }
+
+            ' class UserMetadataTable {
+            '     + name: string
+            '     + dates: CommonDateTable
+            ' }
+
+            ' class UserContentTable {
+            '     + email: string
+            '     + phone: string
+            '     + firstName: string
+            '     + lastName: string
+            '     + projectRoles: PROJECT_ROLE_TYPES[]
+            '     + scrumRoles: SCRUM_ROLE_TYPES[]
+            '     + password: string
+            ' }
+
+            ' class CommonDateTable {
+            '     + createdAt: Date
+            '     + createdBy: string
+            '     + updatedAt: Date
+            '     + updatedBy: string
+            '     + startedAt?: Date
+            '     + startedBy?: string
+            '     + startDate?: Date
+            '     + endDate?: Date
+            '     + completedAt?: Date
+            '     + completedBy?: string
+            ' }
+
+            ' class CommentTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + content: string
+            '     + updatedBy: string
+            '     + updatedAt: Date
+            ' }
+
+            ' class DurationTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + startDate: Date
+            '     + endDate: Date
+            ' }
+
+            ' class IdUuidStatusTable {
+            '     + ID: string
+            '     + UUID: string
+            '     + status: GENERAL_STATUS_TYPES
+            ' }
+
+            ' class IdUuidTable {
+            '     + ID: string
+            '     + UUID: string
+            ' }
+
+            ' class NameUrlTable {
+            '     + name: string
+            '     + url: string
+            ' }
+
+            ' class PaginationTable {
+            '     + skip?: number
+            '     + take?: number
+            ' }
+
+            ' class RelationTable {
+            '     + UUID: string
+            '     + relationType: RELATION_TYPES
+            '     + sourceUUID: string
+            '     + targetUUID: string
+            '     + createdAt: Date
+            '     + updatedAt: Date
+            ' }
+        }
+
+        UserServiceServer --> UserService
+        UserServiceServer --> AuthMiddleware
+        AuthMiddleware --> UserServiceServer
+        UserService --> UserRepository
+        UserService --> UserCache
+    }
+
+    UserService -down-> OtherMicroservice1
+
+    package "Other Microservice 1" as OtherMicroservice1 {
+        ' // Other Microservice 1 components
+    }
+
+    queue MessageQueue <<Queue>>
+    MessageQueue .up.> UserService : <<Consumer>>
+
+    package "Log Aggregation" {
+        class LogAggregator {
+            - log: Log
+            - auditLog: AuditLog
+        }
+
+        ' class AuditLog {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+
+        ' class Log {
+        '     + message: String
+        '     + timestamp: DateTime
+        ' }
+    }
+
+    UserServiceServer --> LogAggregator : <<Sends Audit Log>>
+    UserCache --> LogAggregator : <<Sends Audit Log>>
+    UserRepository --> LogAggregator : <<Sends Audit Log>>
+    UserService --> LogAggregator : <<Sends Log>>
+}
+
+@enduml

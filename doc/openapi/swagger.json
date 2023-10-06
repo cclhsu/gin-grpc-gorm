@@ -1,0 +1,2656 @@
+{
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample API server using Gin and Swagger.",
+        "title": "My API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/health/healthy": {
+            "get": {
+                "description": "Get Health Check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "health"
+                ],
+                "summary": "Get Health Check",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "service",
+                        "description": "Service name",
+                        "name": "service",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/health/live": {
+            "get": {
+                "description": "Get Health Check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "health"
+                ],
+                "summary": "Get Health Check",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "service",
+                        "description": "Service name",
+                        "name": "service",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/health/ready": {
+            "get": {
+                "description": "Get Health Check",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "health"
+                ],
+                "summary": "Get Health Check",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "service",
+                        "description": "Service name",
+                        "name": "service",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/hello/json": {
+            "get": {
+                "description": "get hello world json",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "hello"
+                ],
+                "summary": "get hello world json",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.HelloJsonResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/hello/string": {
+            "get": {
+                "description": "get hello world string",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "hello"
+                ],
+                "summary": "get hello world string",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Teams",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Teams",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Team"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create Team",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Create Team",
+                "parameters": [
+                    {
+                        "description": "New team details",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.CreateTeamRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/content": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Teams Content",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Teams Content",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ListTeamsContentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/email/{email}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Team by Email",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Team by Email",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team email",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/id/{ID}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Team by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Team by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/ids-and-uuids": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Team IDs and UUIDs",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Team IDs and UUIDs",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ListTeamIdUuid"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/metadata": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Teams Metadata",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Teams Metadata",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ListTeamsMetadataResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/name/{name}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Team by Name",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Team by Name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/{UUID}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Team by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Team by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Team"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update Team by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Update Team by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated team details",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UpdateTeamRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete Team by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Delete Team by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team deleted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/{UUID}/content": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Team Content by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Team Content by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team content found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update Team Content by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Update Team Content by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated team content",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UpdateTeamContentRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team content updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/teams/{UUID}/metadata": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Team Metadata by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Get Team Metadata by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team metadata found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update Team Metadata by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Team"
+                ],
+                "summary": "Update Team Metadata by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Team UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated team metadata",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UpdateTeamMetadataRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Team metadata updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Team not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Users",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get Users",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Create User",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create User",
+                "parameters": [
+                    {
+                        "description": "New user details",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.CreateUserRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/content": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Users Content",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get Users Content",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ListUsersContentResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/email/{email}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get User by Email",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User by Email",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User email",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/id/{ID}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get User by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "ID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/ids-and-uuids": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get User IDs and UUIDs",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User IDs and UUIDs",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ListUserIdUuid"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/metadata": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get Users Metadata",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get Users Metadata",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.ListUsersMetadataResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/name/{name}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get User by Name",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User by Name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{UUID}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get User by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.User"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update User by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update User by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated user details",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UpdateUserRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Delete User by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete User by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{UUID}/content": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get User Content by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Content by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User content found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update User Content by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update User Content by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated user content",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UpdateUserContentRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User content updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{UUID}/metadata": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Get User Metadata by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User Metadata by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User metadata found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "Update User Metadata by UUID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update User Metadata by UUID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User UUID",
+                        "name": "UUID",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Updated user metadata",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.UpdateUserMetadataRequest"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User metadata updated",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.CommonDate": {
+            "type": "object",
+            "properties": {
+                "completedAt": {
+                    "type": "string"
+                },
+                "completedBy": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "endDate": {
+                    "type": "string"
+                },
+                "startDate": {
+                    "type": "string"
+                },
+                "startedAt": {
+                    "type": "string"
+                },
+                "startedBy": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.CreateTeamRequest": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.TeamContent"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.TeamMetadata"
+                }
+            }
+        },
+        "model.CreateUserRequest": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.UserContent"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.UserMetadata"
+                }
+            }
+        },
+        "model.Data": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.HelloJsonResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/model.Data"
+                }
+            }
+        },
+        "model.IdUuid": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.ListTeamIdUuid": {
+            "type": "object",
+            "properties": {
+                "teamIdUuids": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.IdUuid"
+                    }
+                }
+            }
+        },
+        "model.ListTeamsContentResponse": {
+            "type": "object",
+            "properties": {
+                "teamContentResponses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.TeamContentResponse"
+                    }
+                }
+            }
+        },
+        "model.ListTeamsMetadataResponse": {
+            "type": "object",
+            "properties": {
+                "teamMetadataResponses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.TeamMetadataResponse"
+                    }
+                }
+            }
+        },
+        "model.ListUserIdUuid": {
+            "type": "object",
+            "properties": {
+                "userIdUuids": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.IdUuid"
+                    }
+                }
+            }
+        },
+        "model.ListUsersContentResponse": {
+            "type": "object",
+            "properties": {
+                "userContentResponses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.UserContentResponse"
+                    }
+                }
+            }
+        },
+        "model.ListUsersMetadataResponse": {
+            "type": "object",
+            "properties": {
+                "userMetadataResponses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.UserMetadataResponse"
+                    }
+                }
+            }
+        },
+        "model.PROJECT_ROLE_TYPES": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7
+            ],
+            "x-enum-varnames": [
+                "PROJECT_ROLE_TYPES_UNSPECIFIED",
+                "PROJECT_ROLE_TYPES_PM",
+                "PROJECT_ROLE_TYPES_EM",
+                "PROJECT_ROLE_TYPES_DEV",
+                "PROJECT_ROLE_TYPES_QA",
+                "PROJECT_ROLE_TYPES_BA",
+                "PROJECT_ROLE_TYPES_UX",
+                "PROJECT_ROLE_TYPES_O"
+            ]
+        },
+        "model.SCRUM_ROLE_TYPES": {
+            "type": "integer",
+            "enum": [
+                0,
+                1,
+                2,
+                3,
+                4
+            ],
+            "x-enum-varnames": [
+                "SCRUM_ROLE_TYPES_UNSPECIFIED",
+                "SCRUM_ROLE_TYPES_PO",
+                "SCRUM_ROLE_TYPES_SM",
+                "SCRUM_ROLE_TYPES_MEMBER",
+                "SCRUM_ROLE_TYPES_O"
+            ]
+        },
+        "model.Team": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.TeamContent"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.TeamMetadata"
+                }
+            }
+        },
+        "model.TeamContent": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "members": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.IdUuid"
+                    }
+                },
+                "productOwner": {
+                    "$ref": "#/definitions/model.IdUuid"
+                },
+                "scrumMaster": {
+                    "$ref": "#/definitions/model.IdUuid"
+                }
+            }
+        },
+        "model.TeamContentResponse": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.TeamContent"
+                }
+            }
+        },
+        "model.TeamMetadata": {
+            "type": "object",
+            "properties": {
+                "dates": {
+                    "$ref": "#/definitions/model.CommonDate"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.TeamMetadataResponse": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.TeamMetadata"
+                }
+            }
+        },
+        "model.UpdateTeamContentRequest": {
+            "type": "object",
+            "properties": {
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.TeamContent"
+                }
+            }
+        },
+        "model.UpdateTeamMetadataRequest": {
+            "type": "object",
+            "properties": {
+                "UUID": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.TeamMetadata"
+                }
+            }
+        },
+        "model.UpdateTeamRequest": {
+            "type": "object",
+            "properties": {
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.TeamContent"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.TeamMetadata"
+                }
+            }
+        },
+        "model.UpdateUserContentRequest": {
+            "type": "object",
+            "properties": {
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.UserContent"
+                }
+            }
+        },
+        "model.UpdateUserMetadataRequest": {
+            "type": "object",
+            "properties": {
+                "UUID": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.UserMetadata"
+                }
+            }
+        },
+        "model.UpdateUserRequest": {
+            "type": "object",
+            "properties": {
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.UserContent"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.UserMetadata"
+                }
+            }
+        },
+        "model.User": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.UserContent"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.UserMetadata"
+                }
+            }
+        },
+        "model.UserContent": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "projectRoles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.PROJECT_ROLE_TYPES"
+                    }
+                },
+                "scrumRoles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.SCRUM_ROLE_TYPES"
+                    }
+                }
+            }
+        },
+        "model.UserContentResponse": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/definitions/model.UserContent"
+                }
+            }
+        },
+        "model.UserMetadata": {
+            "type": "object",
+            "properties": {
+                "dates": {
+                    "$ref": "#/definitions/model.CommonDate"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.UserMetadataResponse": {
+            "type": "object",
+            "properties": {
+                "ID": {
+                    "type": "string"
+                },
+                "UUID": {
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/model.UserMetadata"
+                }
+            }
+        }
+    }
+}
